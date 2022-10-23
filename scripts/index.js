@@ -41,7 +41,7 @@ const generateEnvironment = (params = undefined) => {
 /**
  * Render-level loop runner using Environment.next()
  */
-const runLoop = (speed = 2) => {
+const runLoop = (speed = 10) => {
     let info = env.info
     if (info.executionId) {
         return

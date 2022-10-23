@@ -40,7 +40,7 @@ class CellSet {
      * @param {Cell} cell 
      */
     add(cell) {
-        if (this.backing.findIndex(v => cell.equals(v))) {
+        if (this.backing.findIndex(v => cell.equals(v)) > -1) {
             return
         } else {
             this.backing.push(cell)
@@ -49,6 +49,10 @@ class CellSet {
     
     values() {
         return this.backing;
+    }
+
+    get size() {
+        return this.backing.length;
     }
 }
 
