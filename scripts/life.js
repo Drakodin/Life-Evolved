@@ -29,7 +29,10 @@ class Cell {
 
 class CellSet {
     constructor(tracking = []) {
-        this.backing = tracking
+        this.backing = []
+        tracking.forEach(cell => {
+            this.add(cell)
+        })
     }
 
     /**
@@ -243,7 +246,7 @@ class Environment {
     updateCells(prev, curr) {
         let union = new CellSet([...prev, ...curr])
         let updated = []
-        for (let cell of union) {
+        for (let cell of union.values()) {
             let prevIdx = prev.findIndex(v => v.equals(cell))
             let currIdx = curr.findIndex(v => v.equals(cell))
 
