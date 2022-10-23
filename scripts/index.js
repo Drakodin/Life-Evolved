@@ -102,11 +102,27 @@ const renderLoop = () => {
     updateGUI(info.grid, info.cells)
 }
 
+/**
+ * Loads a predefined board using a parameter
+ * generator from lib.js.
+ * 
+ * Passing no parameters nets the default board with
+ * no special zones that alter rules.
+ * 
+ * @param {string} type 
+ */
 const initialize = (type = "") => {
     switch(type) {
+        case "quad": {
+            let params = quadrants()
+            generateEnvironment(params)
+            runLoop()
+            break;
+        }
         default: {
             generateEnvironment()
             runLoop()
+            break;
         }
     }
 }
