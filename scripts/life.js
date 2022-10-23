@@ -111,6 +111,15 @@ class Environment {
         this.executionId = ""
     }
 
+    get info() {
+        return {
+            cells: this.cells,
+            grid: this.grid,
+            pause: this.pause,
+            size: this.size
+        }
+    }
+
     /**
      * Updates a location's status on the board.
      * 
