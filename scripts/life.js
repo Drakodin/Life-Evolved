@@ -27,6 +27,28 @@ class Cell {
     }
 }
 
+class CellSet {
+    constructor(tracking = []) {
+        this.backing = tracking
+    }
+
+    /**
+     * Adds a cell to the set.
+     * @param {Cell} cell 
+     */
+    add(cell) {
+        if (this.backing.findIndex(v => cell.equals(v))) {
+            return
+        } else {
+            this.backing.push(cell)
+        }
+    }
+    
+    values() {
+        return this.backing;
+    }
+}
+
 /**
  * Returns the status of the cell given its neighbors following
  * the condensed four rules of Conway's Game of Life.
@@ -150,7 +172,7 @@ class Environment {
             case 2: {
                 let cell = this.cells.findIndex(v => {
                     let [cr, cc] = v.location
-                    return row === cr && col === cc
+                    return r === cr && c === cc
                 })
 
                 if (cell === -1) {
@@ -219,7 +241,7 @@ class Environment {
      * @param {Cell[]} curr 
      */
     updateCells(prev, curr) {
-        let union = new Set([...prev, ...curr])
+        let union = new CellSet([...prev, ...curr])
         let updated = []
         for (let cell of union) {
             let prevIdx = prev.findIndex(v => v.equals(cell))
