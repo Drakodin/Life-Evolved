@@ -1,0 +1,39 @@
+#env-board {
+    display: grid;
+}
+
+.grid-square {
+    height: 15px;
+    width: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px dotted gray;
+    position: relative;
+}
+
+.cell {
+    height: 12px;
+    width: 12px;
+    transform-origin: center;
+    border-radius: 5%;
+    background-color: #000;
+}
+
+.zone-0 {
+    background-color: #f9ffc3
+}
+
+.zone-1 {
+    background-color: #ffa2a2;
+}
+
+.zone-2 {
+    background-color: #a3d3ff;
+}
+
+.zone-3 {
+    background-color: #74c99a;
+}

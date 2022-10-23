@@ -58,7 +58,7 @@ const conway = (alive, neighbors) => {
 
 const ENVIRONMENT_DEFAULT_PARAMS = {
     cells: [],
-    cellCount: 20,
+    cellCount: 60,
     size: [30, 30],
     deadZones: [],
     reviveZones: [],
@@ -97,10 +97,10 @@ class Environment {
         if (params.cellCount > 0) {
             let indices = new Set()
             while (indices.size < params.cellCount) {
-                indices.add(Math.trunc(Math.random() * this.size))
+                indices.add(Math.trunc(Math.random() * (this.size[0] * this.size[1])))
             }
             this.cells = Array.from(indices).map(v => {
-                index = [Math.floor(v / this.size[1]), v % this.size[1]]
+                let index = [Math.floor(v / this.size[1]), v % this.size[1]]
                 return new Cell(index)
             })
         } else if (params.cells.length > 0) {
