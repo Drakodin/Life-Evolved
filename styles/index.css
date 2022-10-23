@@ -1,5 +1,7 @@
 #env-board {
     display: grid;
+    column-gap: 1px;
+    row-gap: 1px;
 }
 
 .grid-square {
@@ -10,13 +12,13 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    border: 1px dotted gray;
+    border: 1px solid gray;
     position: relative;
 }
 
 .cell {
-    height: 12px;
-    width: 12px;
+    height: 100%;
+    width: 100%;
     transform-origin: center;
     border-radius: 5%;
     background-color: #000;

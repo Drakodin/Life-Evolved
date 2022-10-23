@@ -58,7 +58,7 @@ const conway = (alive, neighbors) => {
 
 const ENVIRONMENT_DEFAULT_PARAMS = {
     cells: [],
-    cellCount: 60,
+    cellCount: 225,
     size: [30, 30],
     deadZones: [],
     reviveZones: [],
@@ -116,7 +116,8 @@ class Environment {
             cells: this.cells,
             grid: this.grid,
             pause: this.pause,
-            size: this.size
+            size: this.size,
+            executionId: this.executionId
         }
     }
 
@@ -173,7 +174,7 @@ class Environment {
 
                 let currCell = this.cells.find(v => {
                     let [cr, cc] = v.location
-                    return row === cr && col === cc
+                    return r === cr && c === cc
                 })
 
                 if (conway(!!currCell, cells)) {
@@ -239,6 +240,18 @@ class Environment {
      */
     halt() {
         this.pause = true
+        clearInterval(this.executionId)
+    }
+
+    /**
+     * Sets the pause property to false, which resumes execution
+     */
+    resume() {
+        this.pause = false
+    }
+
+    setExecutionLoop(id) {
+        this.executionId = id;
     }
 
     /**

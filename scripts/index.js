@@ -32,9 +32,25 @@ const generateEnvironment = (params = undefined) => {
         let [r, c] = cell.location;
         let square = document.getElementById(`sq:${r}-${c}`)
         let cellDiv = document.createElement("div")
+        cellDiv.id = `cell:${r}-${c}`
         cellDiv.classList.add("cell")
         square.appendChild(cellDiv)
     })
+}
+
+/**
+ * Render-level loop runner using Environment.next()
+ */
+const runLoop = (speed = 10) => {
+    let info = env.info
+    if (info.executionId) {
+        return
+    }
+
+    if (info.pause) {
+        env.resume()
+    }
+    env.setExecutionLoop(setInterval(renderLoop, 1000/speed))
 }
 
 /**
@@ -44,5 +60,53 @@ const generateEnvironment = (params = undefined) => {
  * @param {Cell[]} cells 
  */
 const updateGUI = (grid, cells) => {
-    
+    // Some zones can spread
+    grid.forEach((row, idx) => {
+        row.forEach((v, i) => {
+            let square = document.getElementById(`sq:${idx}-${i}`);
+            let zoneClass = [...square.classList].filter(v => {
+                return /zone/.test(v)
+            })
+            square.classList.replace(zoneClass[0], `zone-${v}`)
+        })
+    })
+
+    // Update all cells
+    let currCells = [...document.querySelectorAll(".cell")]
+    let matched = []
+    cells.forEach(cell => {
+        let [r, c] = cell.location;
+        if (currCells.find(v => v.id === `cell:${r}-${c}`)) {
+            matched.push(cell)
+        } else {
+            let square = document.getElementById(`sq:${r}-${c}`)
+            let cellDiv = document.createElement("div")
+            cellDiv.id = `cell:${r}-${c}`
+            cellDiv.classList.add("cell")
+            square.appendChild(cellDiv)
+        }
+    })
+
+    currCells.forEach(cellEl => {
+        let loc = cellEl.id.split(":")[1].split("-").map(v => Number.parseInt(v))
+        if (!cells.find(c => c.location[0] === loc[0] && c.location[1] === loc[1])) {
+            cellEl.remove()
+        }
+    })
+}
+
+const renderLoop = () => {
+    env.next()
+    let info = env.info;
+
+    updateGUI(info.grid, info.cells)
+}
+
+const initialize = (type = "") => {
+    switch(type) {
+        default: {
+            generateEnvironment()
+            runLoop()
+        }
+    }
 }
