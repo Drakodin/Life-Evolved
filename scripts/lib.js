@@ -36,3 +36,75 @@ const quadrants = () => {
         lifeZones: lifeZones
     }
 }
+
+const dangerOnly = (sparsity = 8) => {
+    if (!sparsity) {
+        sparsity = 8;
+    }
+    let deadZones = [];
+
+    let size = [35, 35];
+    let cellCount = 600;
+
+    for (let i = 0; i < 1224; i++) {
+        let index = [Math.trunc(i / 35), i % 35]
+        let zone = Math.floor(Math.random() * sparsity)
+        switch (zone) {
+            case 1: {
+                deadZones.push(index)
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    }
+    return {
+        cells: [],
+        cellCount: cellCount,
+        size: size,
+        deadZones: deadZones,
+        reviveZones: [],
+        lifeZones: []
+    }
+}
+
+const randomized = () => {
+    let deadZones = [];
+    let reviveZones = [];
+    let lifeZones = [];
+
+    let size = [35, 35]
+    let cellCount = 400;
+
+    for (let i = 0; i < 1224; i++) {
+        let index = [Math.trunc(i / 35), i % 35]
+        let zone = Math.floor(Math.random() * 6)
+        switch (zone) {
+            case 1: {
+                deadZones.push(index)
+                break;
+            }
+            case 2: {
+                reviveZones.push(index)
+                break;
+            }
+            case 3: {
+                lifeZones.push(index)
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    }
+
+    return {
+        cells: [],
+        cellCount: cellCount,
+        size: size,
+        deadZones: deadZones,
+        reviveZones: reviveZones,
+        lifeZones: lifeZones
+    }
+}

@@ -111,8 +111,20 @@ const renderLoop = () => {
  * 
  * @param {string} type 
  */
-const initialize = (type = "") => {
+const initialize = (type = "", kwargs = {}) => {
     switch(type) {
+        case "random": {
+            let params = randomized()
+            generateEnvironment(params)
+            runLoop()
+            break;
+        }
+        case "danger": {
+            let params = dangerOnly(kwargs["sparsity"]);
+            generateEnvironment(params)
+            runLoop()
+            break;
+        }
         case "quad": {
             let params = quadrants()
             generateEnvironment(params)
