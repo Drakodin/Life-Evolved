@@ -112,6 +112,10 @@ const renderLoop = () => {
  * @param {string} type 
  */
 const initialize = (type = "", kwargs = {}) => {
+    if (env) {
+        env.halt()
+    }
+
     switch(type) {
         case "random": {
             let params = randomized()
