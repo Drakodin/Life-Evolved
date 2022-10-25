@@ -227,7 +227,7 @@ class Environment {
             }
             case 2: {
                 // Opposite of the default case, if the cell is slated to die, it will not.
-                if (!conway(!!currCell, cells)) {
+                if (!conway(!!currCell, cells) && currCell) {
                     return new Cell([r, c])
                 }
                 return undefined;

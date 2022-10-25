@@ -118,13 +118,13 @@ const initialize = (type = "", kwargs = {}) => {
 
     switch(type) {
         case "random": {
-            let params = randomized(kwargs["sparsity"]?? 6)
+            let params = randomized(kwargs["sparsity"]?? 50)
             generateEnvironment(params)
             runLoop()
             break;
         }
         case "danger": {
-            let params = dangerOnly(kwargs["sparsity"]?? 8);
+            let params = dangerOnly(kwargs["sparsity"]?? 50);
             generateEnvironment(params)
             runLoop()
             break;
@@ -136,7 +136,7 @@ const initialize = (type = "", kwargs = {}) => {
             break;
         }
         case "life": {
-            let params = lifeOnly(kwargs["sparsity"]?? 20)
+            let params = lifeOnly(kwargs["sparsity"]?? 50)
             generateEnvironment(params)
             runLoop()
             break;
