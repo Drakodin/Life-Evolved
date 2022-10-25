@@ -24,4 +24,5 @@ UI: No
 |`quad`|`{}`|Initializes a 24x24 grid where the board is divided into 4 quadrants of special zones and regular zones. This is demonstrate the intended effects of the board.|
 |`danger`|`{sparsity: number \| 50}`|Initializes a 35x35 grid, playing the Game of Life, except with danger zones randomly scattered, each consuming about 2% of the board.|
 |`life`|`{sparsity: number \| 50}`|Initializes a 35x35 grid, playing the Game of Life, except with life zones randomly scattered, each consuming about 2% of the board.|
+
 As kwargs, note that the exact word must be spelled out. Else, it is assumed to be not present and the default value is used.
