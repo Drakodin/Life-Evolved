@@ -1,3 +1,10 @@
+:root {
+    --danger-cell: #882929;
+    --revive-cell: #055baa;
+    --life-cell: #147030;
+}
+
+
 #env-board {
     display: grid;
     column-gap: 1px;
@@ -38,4 +45,16 @@
 
 .zone-3 {
     background-color: #74c99a;
+}
+
+.zone-1-visible {
+    background-color: var(--danger-cell)
+}
+
+.zone-2-visible {
+    background-color: var(--revive-cell);
+}
+
+.zone-3-visible {
+    background-color: var(--life-cell);
 }
