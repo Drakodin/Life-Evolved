@@ -205,43 +205,43 @@ class Environment {
         ]
         let zone = this.grid[r][c]
 
+        let cells = 0
+        neighbors.forEach(v => {
+            let [row, col] = v;
+            let cell = this.cells.findIndex(v => {
+                let [cr, cc] = v.location
+                return row === cr && col === cc
+            })
+            cells += (cell > -1) ? 1 : 0
+        })
+
+        let currCell = this.cells.find(v => {
+            let [cr, cc] = v.location
+            return r === cr && c === cc
+        })
+
         switch (zone) {
             case 1: {
+                // Never returns a cell
                 return undefined;
             }
             case 2: {
-                let cell = this.cells.findIndex(v => {
-                    let [cr, cc] = v.location
-                    return r === cr && c === cc
-                })
-
-                if (cell === -1) {
+                // Opposite of the default case, if the cell is slated to die, it will not.
+                if (!conway(!!currCell, cells)) {
                     return new Cell([r, c])
                 }
-                break;
+                return undefined;
             }
             case 3: {
+                // Always returns a new cell
                 return new Cell([r, c])
             }
             default: {
-                let cells = 0
-                neighbors.forEach(v => {
-                    let [row, col] = v;
-                    let cell = this.cells.findIndex(v => {
-                        let [cr, cc] = v.location
-                        return row === cr && col === cc
-                    })
-                    cells += (cell > -1) ? 1 : 0
-                })
-
-                let currCell = this.cells.find(v => {
-                    let [cr, cc] = v.location
-                    return r === cr && c === cc
-                })
-
+                // Follows Conway's rules to determine if a cell exists
                 if (conway(!!currCell, cells)) {
                     return new Cell([r, c])
-                }                
+                }
+                return undefined;                
             }
         }
     }
