@@ -150,6 +150,39 @@ class Environment {
         }
     }
 
+    get zoneInfo() {
+        let zones = {
+            normal: 0,
+            dead: 0,
+            revive: 0,
+            life: 0
+        }
+
+        for (let i = 0; i < this.size[0]; i++) {
+            for (let j = 0; j < this.size[1]; j++) {
+                switch (this.grid[i][j]) {
+                    case 1: {
+                        zones.dead += 1;
+                        break;
+                    }
+                    case 2: {
+                        zones.revive += 1;
+                        break;
+                    }
+                    case 3: {
+                        zones.life += 1;
+                        break;
+                    }
+                    default: {
+                        zones.normal += 1;
+                        break;
+                    }
+                }
+            }
+        }
+        return zones;
+    }
+
     /**
      * Updates a location's status on the board.
      * 

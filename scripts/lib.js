@@ -69,7 +69,7 @@ const dangerOnly = (sparsity = 8) => {
     }
 }
 
-const randomized = () => {
+const randomized = (sparsity = 6) => {
     let deadZones = [];
     let reviveZones = [];
     let lifeZones = [];
@@ -77,9 +77,13 @@ const randomized = () => {
     let size = [35, 35]
     let cellCount = 400;
 
+    if (!sparsity) {
+        sparsity = 6;
+    }
+
     for (let i = 0; i < 1224; i++) {
         let index = [Math.trunc(i / 35), i % 35]
-        let zone = Math.floor(Math.random() * 6)
+        let zone = Math.floor(Math.random() * sparsity)
         switch (zone) {
             case 1: {
                 deadZones.push(index)
@@ -105,6 +109,29 @@ const randomized = () => {
         size: size,
         deadZones: deadZones,
         reviveZones: reviveZones,
+        lifeZones: lifeZones
+    }
+}
+
+const lifeOnly = (sparsity) => {
+    let cellCount = 200;
+    let size = [35, 35]
+    let lifeZones = []
+
+    for (let i = 0; i < 1224; i++) {
+        let index = [Math.trunc(i / 35), i % 35]
+        let zone = Math.floor(Math.random() * sparsity)
+        if (zone === 1) {
+            lifeZones.push(index)
+        }
+    }
+
+    return {
+        cells: [],
+        cellCount: cellCount,
+        size: size,
+        deadZones: [],
+        reviveZones: [],
         lifeZones: lifeZones
     }
 }
